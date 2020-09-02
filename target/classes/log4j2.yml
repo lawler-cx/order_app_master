@@ -1,0 +1,49 @@
+# 共有8个级别的日志，按照从低到高：ALL < TRACE < DEBUG < INFO < WARN <ERROR < FATAL < OFF
+Configuration:
+  status: INFO
+
+  Properties:
+    Property:
+      - name: log.pattern
+        value: "[%d{yyyy-MM-dd HH:mm:ss}] %-5level %class{36} %L %M - %msg%xEx%n"
+      - name: file.log.pattern
+        value: "[%p] ${PID:-} %d{yyyy-MM-dd HH:mm:ss.SSS} - %t (%l) - %m%n"
+      - name: project.name
+        value: order-app-master
+      - name: log.path
+        value: D:\log4j2-logs
+
+  Appenders:
+    Console:
+      name: CONSOLE
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${log.pattern}
+
+    RollingFile:
+      - name: ROLLING_FILE
+        ignoreExceptions: false
+        fileName: ${log.path}\${project.name}\${project.name}.log
+        filePattern:  "${log.path}\\${project.name}\\historyLog\\%d{yyyy-MM-dd}-%i.log.gz"
+        PatternLayout:
+          pattern: ${file.log.pattern}
+        Policies:
+          TimeBasedTriggeringPolicy:
+            modulate: true
+            interval : 1
+        DefaultRolloverStrategy:
+          max: 30
+
+  Loggers:
+    root:
+      level: INFO
+      AppenderRef:
+        - ref: CONSOLE
+        - ref: ROLLING_FILE
+    Logger:   #具体监听包下面的日志
+      - name: druid.sql.Statement
+        level: DEBUG
+        additivity: false
+        AppenderRef:    #指定日志输出位置,格式
+          - ref: CONSOLE
+          - ref: ROLLING_FILE

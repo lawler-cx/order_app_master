@@ -1,0 +1,52 @@
+server:
+  port: 18320
+
+spring:
+  application:
+    name: order-app-master
+  datasource:
+    url: jdbc:postgresql://118.25.22.45:5432/postgres #数据库连接url
+    username: postgres #用户名
+    password: 123456 #密码
+    driver-class-name: org.postgresql.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 10
+    minIdle: 10
+    maxActive: 20
+    maxWait: 60000
+    keepAlive: true
+    validationQuery: SELECT 1
+    timeBetweenEvictionRunsMillis: 2000
+    minEvictableIdleTimeMillis: 180000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    asyncInit: true
+    #filters: stat,log4j2
+    logSlowSql: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+    druid:    #使用log4j2排除
+      filter:
+        slf4j:
+          enabled: true
+          statement-create-after-log-enabled: false
+          statement-close-after-log-enabled: false
+          result-set-open-after-log-enabled: false
+          result-set-close-after-log-enabled: false
+  mybatis:
+    type-aliases-package: cn.cityworks.data.domain
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  nifi:
+    host: 10.6.3.13
+    port: 9000
+    jarLocation: /export/servers/nifi-1.11.3/lib/
+
+#log4j2
+logging:
+  config: classpath:log4j2.yml
