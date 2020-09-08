@@ -7,5 +7,11 @@
         <parameter value="D:\idea\spark-master\target/.scala_dependencies" />
       </parameters>
     </profile>
+    <profile name="Maven 2" modules="order-app-master">
+      <parameters>
+        <parameter value="-dependencyfile" />
+        <parameter value="F:\idea\order_app_master\target/.scala_dependencies" />
+      </parameters>
+    </profile>
   </component>
 </project>

@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="order-app-master" />
         <module name="spark-master" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="order-app-master" target="1.8" />
       <module name="spark-master" target="1.8" />
     </bytecodeTargetLevel>
   </component>

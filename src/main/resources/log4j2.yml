@@ -11,7 +11,7 @@ Configuration:
       - name: project.name
         value: order-app-master
       - name: log.path
-        value: D:\log4j2-logs
+        value: G:\log4j2-logs
 
   Appenders:
     Console:
